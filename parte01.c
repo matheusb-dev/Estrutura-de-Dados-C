@@ -178,7 +178,7 @@ void cadastraFuncionario(TipoLista *L){
         printf("Deseja Gravar os Dados (1.Sim / 2.Nao)" );
         scanf("%d", &resp);
         if(resp == 1){
-            p =(TipoApontador)malloc(sizeof(TipoItem));
+            p = (TipoApontador)malloc(sizeof(TipoItem));
             p->proximo = NULL;
 
             p->conteudo = reg_func;
@@ -206,10 +206,68 @@ void cadastraFuncionario(TipoLista *L){
 }
 
 
-//Programa Principals
+//Listar os funcionarios
+void listar_funcionario(TipoLista *L){
+    
+    TipoApontador p;
+    p = L -> Primeiro;
+    while(p!= NULL){
+
+        tela();
+        telaFuncionario();
+        gotoxy(27, 07);
+        printf("%d", p->conteudo.codigo);
+        gotoxy(27, 9);
+        printf("%s", p -> conteudo.nome);
+        gotoxy(27, 11);
+        printf("%s", p-> conteudo.endereco);
+        gotoxy(27, 13);
+        printf("%s", p-> conteudo.cargo);
+        gotoxy(27, 15);
+        printf("%s", p->conteudo.dt_admissao);
+        gotoxy(27, 17);
+        printf("%s", p->conteudo.telefone);
+        gotoxy(27, 19);
+        printf("%f", p->conteudo.salario);
+
+        gotoxy(07, 23);
+        printf("Pressione qualquer tecla para continuar.... ");
+        getch();
+    }
+}
+
+//Programa Principals, 
 void main(){
 
-    tela();
-    telaFuncionario();
+   system("color 1F");
+   int opc;
+   TipoLista L;
+   L.Primeiro = NULL;
+   L.Ultimo = NULL;
 
+  do
+  {
+        tela();
+        gotoxy(30, 03);
+        printf("Folha de pagamento");
+        gotoxy(10,10);
+        printf("1. Cadastrar funcionario");
+        gotoxy(10, 12);
+        printf("2. Listar funcionario");
+        gotoxy(10, 14);
+        printf("3. sair");
+        gotoxy(07, 23);
+        printf("Digite sua opcao: ");
+        scanf("%d", &opc);
+        switch (opc)
+        {
+        case 1:
+            cadastraFuncionario(&L);
+            break;
+        
+        case 2:
+            listar_funcionario(&L);
+        }
+  } while (opc != 3);
+  
 }
