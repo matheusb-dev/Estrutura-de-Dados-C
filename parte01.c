@@ -29,7 +29,6 @@ typedef struct{ //tipo lista
     TipoApontador Ultimo;
 }TipoLista;
 
-
 //Definindo a posição do cursor
 void gotoxy(int x, int y){
     COORD coord;
@@ -152,27 +151,32 @@ void cadastraFuncionario(TipoLista *L){
         gotoxy(27, 07);
         printf("                   ");
 
-        gotoxy(27, 07);
+        gotoxy(43, 8);
         scanf("%d", &reg_func.codigo); //revisar dps
 
-        gotoxy(27, 9);
+        gotoxy(43, 10);
         fflush(stdin); //pesquisar dps
         fgets(reg_func.nome,50,stdin);
 
-        gotoxy(27, 11);
+        gotoxy(43, 12);
         fflush(stdin);
-        fgets(reg_func.cargo, 50, stdin);
+        fgets(reg_func.endereco, 50, stdin); //codigo, nome, endereco, telefone, cargo, salario
 
-        gotoxy(27, 15);
-        fflush(stdin);
-        fgets(reg_func.dt_admissao,11,stdin);
-
-        gotoxy(27, 17);
+        gotoxy(43, 14);
         fflush(stdin);
         fgets(reg_func.telefone,15,stdin);
 
-        gotoxy(27, 19);
+        gotoxy(43, 16);
+        fflush(stdin);
+        fgets(reg_func.cargo,15,stdin);
+
+        gotoxy(43, 18);
         scanf("%f", &reg_func.salario);
+
+        gotoxy(43, 20);
+        fflush(stdin);
+        fgets(reg_func.dt_admissao,15,stdin);
+
 
         gotoxy(07,23);
         printf("Deseja Gravar os Dados (1.Sim / 2.Nao)" );
@@ -191,7 +195,7 @@ void cadastraFuncionario(TipoLista *L){
             }
             
             gotoxy(07,23);
-            printf("                                    ");
+            printf("                                                      ");
             gotoxy(07,23);
             printf("Cadastrado com sucesso");
 
@@ -215,24 +219,25 @@ void listar_funcionario(TipoLista *L){
 
         tela();
         telaFuncionario();
-        gotoxy(27, 07);
+        gotoxy(43, 8);
         printf("%d", p->conteudo.codigo);
-        gotoxy(27, 9);
+        gotoxy(43, 10);
         printf("%s", p -> conteudo.nome);
-        gotoxy(27, 11);
+        gotoxy(43, 12);
         printf("%s", p-> conteudo.endereco);
-        gotoxy(27, 13);
-        printf("%s", p-> conteudo.cargo);
-        gotoxy(27, 15);
-        printf("%s", p->conteudo.dt_admissao);
-        gotoxy(27, 17);
+        gotoxy(43, 14);
         printf("%s", p->conteudo.telefone);
-        gotoxy(27, 19);
-        printf("%f", p->conteudo.salario);
+        gotoxy(43, 16);
+        printf("%s", p-> conteudo.cargo);
+        gotoxy(43, 18);
+        printf("%f", p->conteudo.salario); //codigo, nome, endereco, telefone, cargo, salario
+        gotoxy(43, 20);
+        printf("%s", p->conteudo.dt_admissao);
 
         gotoxy(07, 23);
         printf("Pressione qualquer tecla para continuar.... ");
         getch();
+        p = p->proximo;
     }
 }
 
