@@ -13,11 +13,22 @@ informações em disco.
 #include <conio.h>
 #include <windows.h>
 
+
+//Definindo Posicao do Cursor
+void gotoxy(int x, int y){
+    COORD coord;
+    coord.X = (short)x;
+    coord.Y = (short)y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+
 //Programa Principal
 void main(){
 
+    gotoxy(20,5);
     printf("Hello World");
-    
+
 }
 
 
