@@ -31,7 +31,7 @@ void tela(){
     system("cls"); //limpar a tela
     system("cls"); //limpa a tela
 
-    for (lin = 1; lin < 25; lin++)
+    for (lin = 1; lin < 27; lin++)
     {
         gotoxy(01, lin);
         printf("|");
@@ -47,10 +47,10 @@ void tela(){
         gotoxy(col, 04);
         printf("-");
 
-        gotoxy(col, 22);
+        gotoxy(col, 24);
         printf("-");
 
-        gotoxy(col, 24);
+        gotoxy(col, 26);
         printf("-");
     }
 
@@ -64,14 +64,14 @@ void tela(){
     gotoxy(79, 04);
     printf("+");
 
-    gotoxy(01, 22);
-    printf("+");
-    gotoxy(79, 22);
-    printf("+");
-
     gotoxy(01, 24);
     printf("+");
     gotoxy(79, 24);
+    printf("+");
+
+    gotoxy(01, 26);
+    printf("+");
+    gotoxy(79, 26);
     printf("+");
 
     gotoxy(02, 02);
@@ -83,7 +83,7 @@ void tela(){
     gotoxy(51, 03);
     printf("LISTA SIMPLESMENTE ENCADEADA");
 
-    gotoxy(02, 23);
+    gotoxy(02, 25);
     printf("MSG: ");
 
     gotoxy(7,02);
@@ -97,7 +97,36 @@ void tela(){
 void main(){
 
     tela();
-    gotoxy(25,20);
+    
+    gotoxy(18,7);
+    printf("1. Cadastrar Funcionario no Final da Lista");
+
+    gotoxy(18, 9);
+    printf("2. Cadastrar Funcionario no Inicio da Lista");
+
+    gotoxy(18, 11);
+    printf("3. Cadastrar Funcionario em uma Posicao da Lista ");
+
+    gotoxy(18, 13);
+    printf("4. Remover Funcionario no Final da Lista");
+
+    gotoxy(18, 15);
+    printf("5. Remover Funcionario no Inicio da Lista ");
+
+    gotoxy(18, 17);
+    printf("6. Remover Funcionario em uma Posicao da Lista");
+
+    gotoxy(18, 19);
+    printf("7. Alteracao do Cadastro de Funcionario ");
+
+    gotoxy(18, 21);
+    printf("8. Consultar Funcionarios");
+
+    gotoxy(18, 23);
+    printf("9. Sair do Programa");
+
+    gotoxy(6,25);
+    getch();
 
 }
 
