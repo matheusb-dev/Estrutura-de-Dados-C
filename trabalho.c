@@ -115,11 +115,45 @@ void tela(){
     printf("Data: 20/10/2024");
 }
 
+//Mostrar tela funcionario
+//Mostra a tela Funcionario
+void telaFuncionario(){
+
+
+            gotoxy(22, 3);
+            printf("| CADASTRO FUNCIONARIO |");
+
+            gotoxy(8, 8);
+            printf("1. CODIGO FUNCIONARIO...........: ");
+
+            gotoxy(8, 10);
+            printf("2. NOME FUNCIONARIO.............: ");
+
+            gotoxy(8, 12);
+            printf("3. ENDERECO FUNCIONARIO.........: ");
+
+            gotoxy(8, 14);
+            printf("4. TELEFONE FUNCIONARIO.........: ");
+
+            gotoxy(8, 16);
+            printf("7. DATA DE ADMISSAO.............: ");
+
+            gotoxy(8, 18);
+            printf("5. CARGO FUNCIONARIO............: ");
+
+            gotoxy(8, 20);
+            printf("6. SALARIO FUNCIONARIO..........: ");
+}
+
+
 //Programa Principal
 void main(){
 
     tela();
     
+    gotoxy(26, 3);
+    printf("| TELA INICIAL |");
+
     gotoxy(18,7);
     printf("1. Cadastrar Funcionario no Final da Lista");
 
