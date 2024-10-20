@@ -1,9 +1,7 @@
 /*  Nome: Matheus ezerra Domingos
     RA: 166479-20224
     Data: 20/10/2024
-    Objetivo:  manipulação de listas, incluindo 
-inserção, remoção, alteração e consulta de dados, além de persistência dessas 
-informações em disco. 
+    Objetivo:  manipulação de listas, incluindo inserção, remoção, alteração e consulta de dados, além de persistência dessas informações em disco. 
 
 */
 
@@ -12,6 +10,30 @@ informações em disco.
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
+
+//Criando a minha estrutura de dados
+typedef struct{
+
+    int codigo; //codigo da pessoa
+    char nome[50]; //nome da pessoa
+    char endereco[50]; //endereço da pessoa
+    char cargo[50]; //carga da pessoa
+    char dt_admissao[11]; //data da admissão
+    char telefone[15]; //numero da pessoa
+    float salario;
+}reg_funcionario; //registro de funcionario tem td isso
+
+typedef struct TipoItem *TipoApontador; //definição do tipo apontador
+
+typedef struct TipoItem{ //tipo item
+    reg_funcionario conteudo; //ai só coloco conteudo.oque eu quero
+    TipoApontador proximo;
+}TipoItem;
+
+typedef struct{ //tipo lista
+    TipoApontador Primeiro;
+    TipoApontador Ultimo;
+}TipoLista;
 
 
 //Definindo Posicao do Cursor
