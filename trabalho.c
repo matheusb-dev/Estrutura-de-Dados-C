@@ -115,7 +115,6 @@ void tela(){
     printf("Data: 20/10/2024");
 }
 
-//Mostrar tela funcionario
 //Mostra a tela Funcionario
 void telaFuncionario(){
 
@@ -136,54 +135,185 @@ void telaFuncionario(){
             printf("4. TELEFONE FUNCIONARIO.........: ");
 
             gotoxy(8, 16);
-            printf("7. DATA DE ADMISSAO.............: ");
-
-            gotoxy(8, 18);
             printf("5. CARGO FUNCIONARIO............: ");
 
-            gotoxy(8, 20);
+            gotoxy(8, 18);
             printf("6. SALARIO FUNCIONARIO..........: ");
+
+            gotoxy(8, 20);
+            printf("7. DATA DE ADMISSAO.............: ");
 }
 
+//Mostrar a tela Cadastro funcionario
+void cadastraFuncionario(TipoLista *L) {
+    reg_funcionario reg_func;
+    TipoApontador p;
+    int resp;
+
+    do {
+        tela(); // chama o desenho da tela
+        telaFuncionario(); // chama a tela funcionario descrição
+
+        gotoxy(30, 03);
+        printf("CADASTRAR FUNCIONARIO");
+
+        // Lê o código do funcionário
+        gotoxy(43, 8);
+        scanf("%d", &reg_func.codigo);
+
+        // Verificação de código único
+        p = L->Primeiro;
+        int codigoExistente = 0; // Flag para verificar código duplicado
+        while (p != NULL) {
+            if (p->conteudo.codigo == reg_func.codigo) {
+                codigoExistente = 1; // Código já existe
+                break;
+            }
+            p = p->proximo;
+        }
+
+        if (codigoExistente) {
+            gotoxy(07, 25);
+            printf("Codigo ja cadastrado. Tente outro.");
+            getch();
+            continue; // Volta para o início do loop se o código for duplicado
+        }
+
+        gotoxy(43, 10);
+        fflush(stdin);
+        fgets(reg_func.nome, 50, stdin);
+
+        gotoxy(43, 12);
+        fflush(stdin);
+        fgets(reg_func.endereco, 50, stdin);
+
+        gotoxy(43, 14);
+        fflush(stdin);
+        fgets(reg_func.telefone, 15, stdin);
+
+        gotoxy(43, 16);
+        fflush(stdin);
+        fgets(reg_func.cargo, 15, stdin);
+
+        gotoxy(43, 18);
+        scanf("%f", &reg_func.salario);
+
+        gotoxy(43, 20);
+        fflush(stdin);
+        fgets(reg_func.dt_admissao, 15, stdin);
+
+        gotoxy(07, 25);
+        printf("Deseja Gravar os Dados (1.Sim / 2.Nao)");
+        scanf("%d", &resp);
+        
+        if (resp == 1) {
+            p = (TipoApontador)malloc(sizeof(TipoItem));
+            p->proximo = NULL;
+            p->conteudo = reg_func;
+
+            if (L->Primeiro == NULL) {
+                L->Primeiro = p;
+                L->Ultimo = p;
+            } else {
+                L->Ultimo->proximo = p;
+                L->Ultimo = p;
+            }
+
+            gotoxy(07, 25);
+            printf("Cadastrado com sucesso");
+            getch();
+        }
+
+        gotoxy(07, 25);
+        printf("Cadastrar novo funcionario (1.Sim / 2.Nao)");
+        scanf("%d", &resp);
+    } while (resp == 1);
+}
+
+//Listar Funcionario
+void listar_funcionario(TipoLista *L){
+    
+    TipoApontador p;
+    p = L -> Primeiro;
+    while(p!= NULL){
+
+        tela();
+        telaFuncionario();
+        gotoxy(43, 8);
+        printf("%d", p->conteudo.codigo);
+        gotoxy(43, 10);
+        printf("%s", p -> conteudo.nome);
+        gotoxy(43, 12);
+        printf("%s", p-> conteudo.endereco);
+        gotoxy(43, 14);
+        printf("%s", p->conteudo.telefone);
+        gotoxy(43, 16);
+        printf("%s", p-> conteudo.cargo);
+        gotoxy(43, 18);
+        printf("%f", p->conteudo.salario); //codigo, nome, endereco, telefone, cargo, salario
+        gotoxy(43, 20);
+        printf("%s", p->conteudo.dt_admissao);
+
+        gotoxy(07, 25);
+        printf("Pressione qualquer tecla para continuar.... ");
+        getch();
+        p = p->proximo;
+    }
+}
 
 //Programa Principal
 void main(){
 
-    tela();
+    system("color 2F");
+    int opc;
+    TipoLista L;
+    L.Primeiro = NULL;
+    L.Ultimo = NULL;
     
-    gotoxy(26, 3);
-    printf("| TELA INICIAL |");
+    do{
+        tela();
+    
+        gotoxy(26, 3);
+        printf("| TELA INICIAL |");
 
-    gotoxy(18,7);
-    printf("1. Cadastrar Funcionario no Final da Lista");
+        gotoxy(18,7);
+        printf("1. Cadastrar Funcionario no Final da Lista");
 
-    gotoxy(18, 9);
-    printf("2. Cadastrar Funcionario no Inicio da Lista");
+        gotoxy(18, 9);
+        printf("2. Cadastrar Funcionario no Inicio da Lista");
 
-    gotoxy(18, 11);
-    printf("3. Cadastrar Funcionario em uma Posicao da Lista ");
+        gotoxy(18, 11);
+        printf("3. Cadastrar Funcionario em uma Posicao da Lista ");
 
-    gotoxy(18, 13);
-    printf("4. Remover Funcionario no Final da Lista");
+        gotoxy(18, 13);
+        printf("4. Remover Funcionario no Final da Lista");
 
-    gotoxy(18, 15);
-    printf("5. Remover Funcionario no Inicio da Lista ");
+        gotoxy(18, 15);
+        printf("5. Remover Funcionario no Inicio da Lista ");
 
-    gotoxy(18, 17);
-    printf("6. Remover Funcionario em uma Posicao da Lista");
+        gotoxy(18, 17);
+        printf("6. Remover Funcionario em uma Posicao da Lista");
 
-    gotoxy(18, 19);
-    printf("7. Alteracao do Cadastro de Funcionario ");
+        gotoxy(18, 19);
+        printf("7. Alteracao do Cadastro de Funcionario ");
 
-    gotoxy(18, 21);
-    printf("8. Consultar Funcionarios");
+        gotoxy(18, 21);
+        printf("8. Consultar Funcionarios");
 
-    gotoxy(18, 23);
-    printf("9. Sair do Programa");
+        gotoxy(18, 23);
+        printf("9. Sair do Programa");
 
-    gotoxy(6,25);
-    getch();
-
+        gotoxy(6,25);
+        printf("Digite sua opcao...: ");
+        scanf("%d",&opc);
+        switch (opc)
+        {
+        case 1:
+            cadastraFuncionario(&L);
+            break;
+        
+        case 2:
+            listar_funcionario(&L);
+        }
+  } while (opc != 3);
 }
-
-
