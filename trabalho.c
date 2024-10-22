@@ -115,7 +115,7 @@ void tela(){
     printf("Data: 20/10/2024");
 }
 
-//Mostra a tela Funcionario
+//Mostra a tela Funcionario Descrição
 void telaFuncionario(){
 
 
@@ -144,40 +144,48 @@ void telaFuncionario(){
             printf("7. DATA DE ADMISSAO.............: ");
 }
 
+
+//Função verificador do código já existente
+int codigoExiste(TipoLista *L, int codigo){
+    TipoApontador p = L->Primeiro;
+    while(p !=NULL){
+        if(p->conteudo.codigo == codigo){
+            return 1; //código já existe
+        }
+        p = p->proximo;
+    }
+    return 0; //código não existe
+}
+
+
 //Mostrar a tela Cadastro funcionario
 void cadastraFuncionario(TipoLista *L) {
+
     reg_funcionario reg_func;
+    
     TipoApontador p;
+
     int resp;
 
     do {
-        tela(); // chama o desenho da tela
-        telaFuncionario(); // chama a tela funcionario descrição
+        tela();
+        telaFuncionario(); //Descrição da tabela funcionarios
 
-        gotoxy(30, 03);
-        printf("CADASTRAR FUNCIONARIO");
-
-        // Lê o código do funcionário
         gotoxy(43, 8);
         scanf("%d", &reg_func.codigo);
 
-        // Verificação de código único
-        p = L->Primeiro;
-        int codigoExistente = 0; // Flag para verificar código duplicado
-        while (p != NULL) {
-            if (p->conteudo.codigo == reg_func.codigo) {
-                codigoExistente = 1; // Código já existe
-                break;
-            }
-            p = p->proximo;
+        //Verificação o código já foi digitado
+        while(codigoExiste(L, reg_func.codigo)){
+            gotoxy(7,25);
+            printf("Codigo ja existe!, Digite um novo codigo: ");
+            gotoxy(43,8);
+            printf("  ");
+            gotoxy(43,8);
+            scanf("%d", &reg_func.codigo);
         }
 
-        if (codigoExistente) {
-            gotoxy(07, 25);
-            printf("Codigo ja cadastrado. Tente outro.");
-            getch();
-            continue; // Volta para o início do loop se o código for duplicado
-        }
+        gotoxy(7,25);
+        printf("                                               ");
 
         gotoxy(43, 10);
         fflush(stdin);
@@ -203,7 +211,7 @@ void cadastraFuncionario(TipoLista *L) {
         fgets(reg_func.dt_admissao, 15, stdin);
 
         gotoxy(07, 25);
-        printf("Deseja Gravar os Dados (1.Sim / 2.Nao)");
+        printf("Deseja Gravar os Dados (1.Sim / 2.Nao) ");
         scanf("%d", &resp);
         
         if (resp == 1) {
@@ -220,12 +228,12 @@ void cadastraFuncionario(TipoLista *L) {
             }
 
             gotoxy(07, 25);
-            printf("Cadastrado com sucesso");
+            printf("Cadastrado com sucesso                      ");
             getch();
         }
 
         gotoxy(07, 25);
-        printf("Cadastrar novo funcionario (1.Sim / 2.Nao)");
+        printf("Cadastrar novo funcionario (1.Sim / 2.Nao) ");
         scanf("%d", &resp);
     } while (resp == 1);
 }
